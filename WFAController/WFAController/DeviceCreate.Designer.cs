@@ -34,13 +34,19 @@
             this.labelType = new System.Windows.Forms.Label();
             this.comboBoxType = new System.Windows.Forms.ComboBox();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.labelTconst = new System.Windows.Forms.Label();
+            this.labelTemp = new System.Windows.Forms.Label();
+            this.numericUpDownTconst = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownTemp = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTconst)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTemp)).BeginInit();
             this.SuspendLayout();
             // 
             // ButtonCreate
             // 
             this.ButtonCreate.Font = new System.Drawing.Font("Algerian", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ButtonCreate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ButtonCreate.Location = new System.Drawing.Point(139, 59);
+            this.ButtonCreate.Location = new System.Drawing.Point(139, 111);
             this.ButtonCreate.Name = "ButtonCreate";
             this.ButtonCreate.Size = new System.Drawing.Size(121, 33);
             this.ButtonCreate.TabIndex = 0;
@@ -87,7 +93,7 @@
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Algerian", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonCancel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonCancel.Location = new System.Drawing.Point(12, 59);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 111);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(121, 33);
             this.buttonCancel.TabIndex = 8;
@@ -95,11 +101,47 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // labelTconst
+            // 
+            this.labelTconst.AutoSize = true;
+            this.labelTconst.Location = new System.Drawing.Point(48, 62);
+            this.labelTconst.Name = "labelTconst";
+            this.labelTconst.Size = new System.Drawing.Size(40, 13);
+            this.labelTconst.TabIndex = 11;
+            this.labelTconst.Text = "Tconst";
+            // 
+            // labelTemp
+            // 
+            this.labelTemp.AutoSize = true;
+            this.labelTemp.Location = new System.Drawing.Point(48, 88);
+            this.labelTemp.Name = "labelTemp";
+            this.labelTemp.Size = new System.Drawing.Size(34, 13);
+            this.labelTemp.TabIndex = 12;
+            this.labelTemp.Text = "Temp";
+            // 
+            // numericUpDownTconst
+            // 
+            this.numericUpDownTconst.Location = new System.Drawing.Point(89, 60);
+            this.numericUpDownTconst.Name = "numericUpDownTconst";
+            this.numericUpDownTconst.Size = new System.Drawing.Size(164, 20);
+            this.numericUpDownTconst.TabIndex = 13;
+            // 
+            // numericUpDownTemp
+            // 
+            this.numericUpDownTemp.Location = new System.Drawing.Point(89, 86);
+            this.numericUpDownTemp.Name = "numericUpDownTemp";
+            this.numericUpDownTemp.Size = new System.Drawing.Size(164, 20);
+            this.numericUpDownTemp.TabIndex = 14;
+            // 
             // DeviceCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(267, 99);
+            this.ClientSize = new System.Drawing.Size(265, 149);
+            this.Controls.Add(this.numericUpDownTemp);
+            this.Controls.Add(this.numericUpDownTconst);
+            this.Controls.Add(this.labelTemp);
+            this.Controls.Add(this.labelTconst);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.comboBoxType);
             this.Controls.Add(this.labelType);
@@ -108,6 +150,8 @@
             this.Controls.Add(this.ButtonCreate);
             this.Name = "DeviceCreate";
             this.Text = "DeviceCreate";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTconst)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTemp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -121,5 +165,9 @@
         private System.Windows.Forms.Label labelType;
         private System.Windows.Forms.ComboBox comboBoxType;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Label labelTconst;
+        private System.Windows.Forms.Label labelTemp;
+        private System.Windows.Forms.NumericUpDown numericUpDownTconst;
+        private System.Windows.Forms.NumericUpDown numericUpDownTemp;
     }
 }

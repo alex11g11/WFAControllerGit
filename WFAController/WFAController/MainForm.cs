@@ -65,6 +65,8 @@ namespace WFAController
             foreach (DeviceBase obj in ListDevice)
             {
                 this.dataGridView1.Rows.Add(obj.GetTableRows());
+                //if (obj.Type == DeviceType.Sensor)
+                //    ((Button)this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[1]).Enabled = false;//).Enabled = false;
             }
         }
 
@@ -82,6 +84,8 @@ namespace WFAController
                 obj.TimingRuns.Add(new TimePeriod(new DateTime(Times.year, Times.month, 1, i, 0, 0, Times.sec), new DateTime(Times.year, Times.month, 1, i+5, 0, 0, Times.sec)));
                 i++;
                 DeviceList.AddDevise(obj);
+
+                this.labelResult.Text = URLConnector.AddDevice(obj);
             }
 
             this.Enabled = true;
