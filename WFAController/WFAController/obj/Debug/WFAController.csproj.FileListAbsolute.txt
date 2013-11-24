@@ -1,0 +1,13 @@
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\bin\Debug\WFAController.exe.config
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\bin\Debug\WFAController.exe
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\bin\Debug\WFAController.pdb
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\obj\Debug\WFAController.Properties.Resources.resources
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\obj\Debug\WFAController.csproj.GenerateResource.Cache
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\obj\Debug\WFAController.exe
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\obj\Debug\WFAController.pdb
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\obj\Debug\WFAController.DeviceCreate.resources
+c:\users\alex\documents\visual studio 2012\Projects\WFAController\WFAController\obj\Debug\WFAController.MainForm.resources
+C:\Users\Alex\Documents\Visual Studio 2012\Projects\WFAController\WFAController\obj\Debug\WFAController.csprojResolveAssemblyReference.cache
+C:\Users\Alex\Documents\GitHub\WFAControllerGit\WFAController\WFAController\bin\Debug\WFAController.exe.config
+C:\Users\Alex\Documents\GitHub\WFAControllerGit\WFAController\WFAController\obj\Debug\WFAController.exe
+C:\Users\Alex\Documents\GitHub\WFAControllerGit\WFAController\WFAController\obj\Debug\WFAController.pdb
