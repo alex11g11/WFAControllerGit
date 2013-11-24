@@ -17,6 +17,10 @@ namespace WFAController.DeviceTimin
 
     class DeviceRepository
     {
+        private string ip = "192.168.1.4";
+        private int port = 2200;
+
+
         private List<DeviceBase> DeviceList;
 
         public event ChangeDeviceList ChangeDeviceList;
@@ -74,8 +78,8 @@ namespace WFAController.DeviceTimin
 
         private void StartListen()
         {
-            IPAddress localAddress = IPAddress.Parse("127.0.0.1");
-            TcpListener listener = new TcpListener(localAddress, 2200);
+            IPAddress localAddress = IPAddress.Parse(ip);
+            TcpListener listener = new TcpListener(localAddress, port);
 
             listener.Start(1);
 
@@ -143,8 +147,9 @@ namespace WFAController.DeviceTimin
                             {
                                 timing.Add(new TimePeriod((DateTime)obj.From, (DateTime)obj.To));
                                 str += " <from = " + ((DateTime)obj.From).Hour + " To = " + ((DateTime)obj.To).Hour + ">";
+                                
                             }
-
+                            MessageBox.Show(str);
                             DeviceList[g].TimingRuns = timing;
                         }
                     }

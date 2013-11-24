@@ -24,7 +24,7 @@ namespace WFAController
     {
         DeviceTimingContol DeviceList;
 
-        int i = 2;
+        //int i = 2;
         Thread th;
 
         DeviceCreate deviceCreateForm;
@@ -75,14 +75,16 @@ namespace WFAController
             this.dataGridView1.Rows[ind].SetValues( Device.SerialNumber.ToString(), 
                                                     Device.State.ToString(),
                                                     Device.Type.ToString());
+
+            URLConnector.ChangeState(Device);
         }
 
         public void deviceTableAdd(DeviceBase obj)
         {
             if (obj != null)
             {
-                obj.TimingRuns.Add(new TimePeriod(new DateTime(Times.year, Times.month, 1, i, 0, 0, Times.sec), new DateTime(Times.year, Times.month, 1, i+5, 0, 0, Times.sec)));
-                i++;
+                //obj.TimingRuns.Add(new TimePeriod(new DateTime(Times.year, Times.month, 1, i, 0, 0, Times.sec), new DateTime(Times.year, Times.month, 1, i+5, 0, 0, Times.sec)));
+                //i++;
                 DeviceList.AddDevise(obj);
 
                 this.labelResult.Text = URLConnector.AddDevice(obj);

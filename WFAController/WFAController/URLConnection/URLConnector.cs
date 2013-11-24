@@ -12,7 +12,7 @@ namespace WFAController.URLConnection
 {
     static class URLConnector
     {
-        private static string baseUrl = "http://localhost:7808/Home/";
+        private static string baseUrl = "http://192.168.1.3:81/Server/Home/";
 
         public static string AlarmSignaling(DeviceBase obj)
         {
@@ -77,10 +77,23 @@ namespace WFAController.URLConnection
 
         public static string AddDevice(DeviceBase obj)
         {
-            string controller = "AddDevice";
+            string controller = "";
+
             string param = "?DeviceSerial=" + obj.SerialNumber
                             + "&Type=" + (int)obj.Type
                             + "&State=" + ((obj.State == true) ? 1 : 0);
+
+            if (obj.Type == DeviceType.Sensor)
+            {
+                controller = "AddSensor";
+
+                param += "&Tconst=" + ((Senser)obj).TemConst;
+                param += "&Temp=" + ((Senser)obj).Temperature;
+            }
+            else
+            {
+                controller = "AddDevice";
+            }
 
             string result = Send(controller, param);
 
