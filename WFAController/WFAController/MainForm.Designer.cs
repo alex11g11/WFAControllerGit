@@ -65,12 +65,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.buttonLoadDevices = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.buttonLoadTimng = new System.Windows.Forms.Button();
             this.SerialNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.states = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tconst = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Temperoture = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ALARM = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ShowTiming = new System.Windows.Forms.DataGridViewButtonColumn();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -91,6 +93,7 @@
             this.Tconst,
             this.Temperoture,
             this.ALARM,
+            this.ShowTiming,
             this.delete,
             this.State});
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
@@ -447,6 +450,16 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // buttonLoadTimng
+            // 
+            this.buttonLoadTimng.Location = new System.Drawing.Point(763, 104);
+            this.buttonLoadTimng.Name = "buttonLoadTimng";
+            this.buttonLoadTimng.Size = new System.Drawing.Size(78, 40);
+            this.buttonLoadTimng.TabIndex = 41;
+            this.buttonLoadTimng.Text = "Load Timng";
+            this.buttonLoadTimng.UseVisualStyleBackColor = true;
+            this.buttonLoadTimng.Click += new System.EventHandler(this.buttonLoadTimng_Click);
+            // 
             // SerialNumber
             // 
             this.SerialNumber.HeaderText = "SerialNumber";
@@ -489,6 +502,12 @@
             this.ALARM.ReadOnly = true;
             this.ALARM.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // ShowTiming
+            // 
+            this.ShowTiming.HeaderText = "Show Timing";
+            this.ShowTiming.Name = "ShowTiming";
+            this.ShowTiming.ReadOnly = true;
+            // 
             // delete
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -512,6 +531,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(850, 481);
+            this.Controls.Add(this.buttonLoadTimng);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.buttonLoadDevices);
             this.Controls.Add(this.label6);
@@ -598,12 +618,14 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonLoadDevices;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button buttonLoadTimng;
         private System.Windows.Forms.DataGridViewTextBoxColumn SerialNumber;
         private System.Windows.Forms.DataGridViewButtonColumn states;
         private System.Windows.Forms.DataGridViewTextBoxColumn Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tconst;
         private System.Windows.Forms.DataGridViewTextBoxColumn Temperoture;
         private System.Windows.Forms.DataGridViewButtonColumn ALARM;
+        private System.Windows.Forms.DataGridViewButtonColumn ShowTiming;
         private System.Windows.Forms.DataGridViewButtonColumn delete;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
 

@@ -122,6 +122,11 @@
             // numericUpDownTconst
             // 
             this.numericUpDownTconst.Location = new System.Drawing.Point(89, 60);
+            this.numericUpDownTconst.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDownTconst.Name = "numericUpDownTconst";
             this.numericUpDownTconst.Size = new System.Drawing.Size(164, 20);
             this.numericUpDownTconst.TabIndex = 13;
@@ -129,6 +134,11 @@
             // numericUpDownTemp
             // 
             this.numericUpDownTemp.Location = new System.Drawing.Point(89, 86);
+            this.numericUpDownTemp.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDownTemp.Name = "numericUpDownTemp";
             this.numericUpDownTemp.Size = new System.Drawing.Size(164, 20);
             this.numericUpDownTemp.TabIndex = 14;

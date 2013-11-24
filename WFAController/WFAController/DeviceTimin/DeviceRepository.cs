@@ -96,7 +96,7 @@ namespace WFAController.DeviceTimin
                 typeList.Add(typeof(List<Device>));
                 typeList.Add(typeof(Device));
                 typeList.Add(typeof(Packet));
-                typeList.Add(typeof(Device));
+                typeList.Add(typeof(Sensor));
 
                 int j = -1;
                 while (j < typeList.Count)
@@ -113,7 +113,14 @@ namespace WFAController.DeviceTimin
 
                     for (int g = 0; g < res.Count; g++)
                     {
-                        this.AddDevise(DeviceConvert.DeviceToDeviceB(res[g]));
+                        if (res[g].Type == 4)
+                        {
+                            this.AddDevise(DeviceConvert.DeviceToSenser(res[g]));
+                        }
+                        else
+                        { 
+                            this.AddDevise(DeviceConvert.DeviceToDeviceB(res[g]));
+                        }                       
                     }
                 }
 
@@ -149,7 +156,7 @@ namespace WFAController.DeviceTimin
                                 str += " <from = " + ((DateTime)obj.From).Hour + " To = " + ((DateTime)obj.To).Hour + ">";
                                 
                             }
-                            MessageBox.Show(str);
+                            //MessageBox.Show(str);
                             DeviceList[g].TimingRuns = timing;
                         }
                     }
@@ -158,6 +165,16 @@ namespace WFAController.DeviceTimin
 
                 if (j == 3)
                 {
+                    var res = (Sensor)Serializer.deserialize(remdata, typeof(Sensor));
+
+                    for (int p = 0; p < DeviceList.Count; p++)
+                    {
+                        if (res.DeviceSerial == DeviceList[p].SerialNumber)
+                        {
+                            ((Senser)DeviceList[p]).TemConst = (int)res.tconst;
+                            EventNow(p);
+                        }
+                    }
 
                 }
 

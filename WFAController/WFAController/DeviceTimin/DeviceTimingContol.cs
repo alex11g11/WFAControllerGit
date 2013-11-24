@@ -40,6 +40,12 @@ namespace WFAController.DeviceTimin
                         this.EventNow(i);
                     }
                 }
+
+                if (this[i].Type == DeviceType.Sensor)
+                {
+                    ((Senser)this[i]).ChangeTemp();
+                    this.EventNow(i);
+                }
             }
 
             StartTime = StartTime.Add(new TimeSpan(0, TimeTick, 0));

@@ -75,6 +75,31 @@ namespace WFAController.URLConnection
             return result;
         }
 
+        public static int GetTconst(DeviceBase obj)
+        {
+            string controller = "sendTconst";
+            string param = "?DeviceSerial=" + obj.SerialNumber;
+
+            string result = Send(controller, param);
+
+            return Convert.ToInt32(result);
+        }
+
+        public static int GetTemp(DeviceBase obj)
+        {
+            string controller = "sendTemperature";
+            string param = "?DeviceSerial=" + obj.SerialNumber;
+
+            string result = Send(controller, param);
+
+            return Convert.ToInt32(result);
+        }
+
+        //public static string DeleteDevise(DeviceBase obj)
+        //{ 
+            
+        //}
+
         public static string AddDevice(DeviceBase obj)
         {
             string controller = "";
@@ -94,6 +119,17 @@ namespace WFAController.URLConnection
             {
                 controller = "AddDevice";
             }
+
+            string result = Send(controller, param);
+
+            return result;
+        }
+
+        public static string LoadTiming(DeviceBase obj)
+        {
+            string controller = "setTiming";
+
+            string param = "?DeviceSerial=" + obj.SerialNumber;
 
             string result = Send(controller, param);
 

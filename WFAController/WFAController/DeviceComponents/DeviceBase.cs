@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using WFAController.URLConnection;
 
 namespace WFAController.DeviceComponents
@@ -64,6 +65,14 @@ namespace WFAController.DeviceComponents
         public string UserName { get; set; }
     }
 
+    public partial class Sensor
+    {
+        public int Id { get; set; }
+        public Nullable<int> DeviceSerial { get; set; }
+        public Nullable<int> temperature { get; set; }
+        public Nullable<int> tconst { get; set; }
+    }
+
     public class Packet
     {
         public Device device { get; set; }
@@ -98,7 +107,21 @@ namespace WFAController.DeviceComponents
             if (obj.State == 0) res.State = false;
             else res.State = true;
 
-            res.TimingRuns = null;
+            res.TimingRuns = new Timing();
+
+            return res;
+        }
+
+        public static Senser DeviceToSenser(Device obj)
+        {
+            Senser res = new Senser();
+
+            res.Type = DeviceType.Sensor;
+            res.SerialNumber = (int)obj.DeviceSerial;
+            res.State = (obj.State == 1) ? true : false;
+            res.TemConst = URLConnector.GetTconst(res);
+            res.Temperature = URLConnector.GetTemp(res);
+            res.TimingRuns = new Timing();
 
             return res;
         }

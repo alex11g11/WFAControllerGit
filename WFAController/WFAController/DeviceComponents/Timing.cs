@@ -33,7 +33,6 @@ namespace WFAController.DeviceComponents
 
     public class Timing : List<TimePeriod>
     {
-
         public Timing()
         { 
         

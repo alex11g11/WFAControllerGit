@@ -72,9 +72,16 @@ namespace WFAController
 
         void DeviceList_ChangeDevice(DeviceBase Device, int ind)
         {
-            this.dataGridView1.Rows[ind].SetValues( Device.SerialNumber.ToString(), 
-                                                    Device.State.ToString(),
-                                                    Device.Type.ToString());
+            //if (Device.Type == DeviceType.Sensor)
+            //{
+                this.dataGridView1.Rows[ind].SetValues(Device.GetTableRows());
+            //}
+            //else
+            //{
+            //    this.dataGridView1.Rows[ind].SetValues(Device.SerialNumber.ToString(),
+            //                            Device.State.ToString(),
+            //                            Device.Type.ToString());
+            //}
 
             URLConnector.ChangeState(Device);
         }
@@ -168,6 +175,21 @@ namespace WFAController
             }
 
             if (e.ColumnIndex == 6)
+            {
+                String str = "timing: ";
+
+                if (DeviceList[e.RowIndex].TimingRuns != null)
+                {
+                    foreach (TimePeriod obj in DeviceList[e.RowIndex].TimingRuns)
+                    {
+                        str += " <from = day(" + obj.From.Day + ") " + obj.From.Hour + ":" + obj.From.Minute
+                            +  " To = day(" + obj.From.Day + ") " + obj.To.Hour + ":" + obj.From.Minute + ">";
+                    }
+                }
+
+                MessageBox.Show(str);
+            }
+            if (e.ColumnIndex == 7)
             {
                 DeviceList.RemoveAt(e.RowIndex);
             }
@@ -273,6 +295,14 @@ namespace WFAController
         private void buttonLoadDevices_Click(object sender, EventArgs e)
         {
             URLConnector.ResicwDevises();
+        }
+
+        private void buttonLoadTimng_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < DeviceList.Count; i++)
+            {
+                URLConnector.LoadTiming(DeviceList[i]);
+            }
         }
 
     }
