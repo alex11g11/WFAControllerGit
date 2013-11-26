@@ -18,11 +18,14 @@ namespace WFAController
             //{
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new MainForm());
+                var obj = new MainForm();
+                Application.Run(obj);
+
+            
             //}
-            //catch (Exception e)
+            //catch (NullReferenceException e)
             //{
-            //    MessageBox.Show(e.ToString());
+            //    MessageBox.Show(e.TargetSite.ToString());
             //}
         }
     }

@@ -20,18 +20,22 @@ namespace WFAController
 {
     public delegate void AddDevise(DeviceBase obj);
 
+    
+
     public partial class MainForm : Form
     {
         DeviceTimingContol DeviceList;
 
-        //int i = 2;
-        Thread th;
-
+        Thread simulThread;
+        //int c = 0;
         DeviceCreate deviceCreateForm;
 
         public MainForm()
         {
             InitializeComponent();
+
+            //this.components
+            //DeviceList.LockObject = new object();
 
             this.comboBoxOBJ_Type.Items.Add(DeviceType.Signaling.ToString());
             this.comboBoxOBJ_Type.Items.Add(DeviceType.Door.ToString());
@@ -49,6 +53,11 @@ namespace WFAController
             deviceCreateForm = new DeviceCreate(obj);
 
             System.Windows.Forms.Control.CheckForIllegalCrossThreadCalls = false;
+
+            //this.dataGridView1.ScrollBars = new ScrollBars();
+
+            //URLConnector.ResicwDevises();
+            //
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -60,11 +69,11 @@ namespace WFAController
 
         void DeviceList_ChangeDeviceList(List<DeviceBase> ListDevice)
         {
-            this.dataGridView1.Rows.Clear();
+            //this.dataGridView1.Rows.Clear();
 
-            foreach (DeviceBase obj in ListDevice)
+            for (int i = this.dataGridView1.Rows.Count; i < ListDevice.Count; i++) 
             {
-                this.dataGridView1.Rows.Add(obj.GetTableRows());
+                this.dataGridView1.Rows.Add(ListDevice[i].GetTableRows());
                 //if (obj.Type == DeviceType.Sensor)
                 //    ((Button)this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[1]).Enabled = false;//).Enabled = false;
             }
@@ -72,16 +81,7 @@ namespace WFAController
 
         void DeviceList_ChangeDevice(DeviceBase Device, int ind)
         {
-            //if (Device.Type == DeviceType.Sensor)
-            //{
-                this.dataGridView1.Rows[ind].SetValues(Device.GetTableRows());
-            //}
-            //else
-            //{
-            //    this.dataGridView1.Rows[ind].SetValues(Device.SerialNumber.ToString(),
-            //                            Device.State.ToString(),
-            //                            Device.Type.ToString());
-            //}
+            this.dataGridView1.Rows[ind].SetValues(Device.GetTableRows());
 
             URLConnector.ChangeState(Device);
         }
@@ -92,7 +92,11 @@ namespace WFAController
             {
                 //obj.TimingRuns.Add(new TimePeriod(new DateTime(Times.year, Times.month, 1, i, 0, 0, Times.sec), new DateTime(Times.year, Times.month, 1, i+5, 0, 0, Times.sec)));
                 //i++;
-                DeviceList.AddDevise(obj);
+
+
+                    DeviceList.AddDevise(obj);
+
+                
 
                 this.labelResult.Text = URLConnector.AddDevice(obj);
             }
@@ -112,20 +116,23 @@ namespace WFAController
             DateTime startTime = new DateTime(Times.year,Times.month,this.comboBoxDay.SelectedIndex + 1,
                                                 (int)this.numericUpDownHour.Value,(int)this.numericUpDownMinute.Value,Times.sec);
 
-            DeviceList.StartTime = startTime;
-            DeviceList.TimeTick = (int)this.numericUpDownSpeed.Value;
 
-            if (th == null)
+                DeviceList.StartTime = startTime;
+                DeviceList.TimeTick = (int)this.numericUpDownSpeed.Value;
+
+
+
+            if (simulThread == null)
             {
-                th = new Thread(TimeTick);
-                th.Start();
+                simulThread = new Thread(TimeTick);
+                simulThread.Start();
 
                 this.buttonStartSimulations.Text = "Stop Simulations";
             }
             else 
             {
-                th.Abort();
-                th = null;
+                simulThread.Abort();
+                simulThread = null;
                 this.buttonStartSimulations.Text = "Start Simulations";
             }
         }
@@ -134,11 +141,14 @@ namespace WFAController
         {
             while (true)
             {
-                DeviceList.TimeGo();
 
-                this.labelNowDay.Text = DeviceList.StartTime.Day.ToString();
-                this.labelNowHour.Text = DeviceList.StartTime.Hour.ToString();
-                this.labelNowMinute.Text = DeviceList.StartTime.Minute.ToString();
+                    DeviceList.TimeGo();
+
+
+                    this.labelNowDay.Text = DeviceList.StartTime.Day.ToString();
+                    this.labelNowHour.Text = DeviceList.StartTime.Hour.ToString();
+                    this.labelNowMinute.Text = DeviceList.StartTime.Minute.ToString();
+                
                 
                 Thread.Sleep(10);
             }
@@ -148,18 +158,21 @@ namespace WFAController
         {
             if (e.ColumnIndex == 1)
             {
-                if (DeviceList[e.RowIndex].State == false)
-                {
-                    DeviceList[e.RowIndex].State = true;
-                    DeviceList.EventNow(e.RowIndex);
-                }
-                else
-                {
-                    DeviceList[e.RowIndex].State = false;
-                    DeviceList.EventNow(e.RowIndex);
-                }
 
-                this.labelResult.Text = URLConnector.ChangeState(DeviceList[e.RowIndex]);
+                    if (DeviceList[e.RowIndex].State == false)
+                    {
+                        DeviceList[e.RowIndex].State = true;
+                        DeviceList.EventNow(e.RowIndex);
+                    }
+                    else
+                    {
+                        DeviceList[e.RowIndex].State = false;
+                        DeviceList.EventNow(e.RowIndex);
+                    }
+                
+
+                    this.labelResult.Text = URLConnector.ChangeState(DeviceList[e.RowIndex]);
+                
             }
 
             if (e.ColumnIndex == 5 && this.dataGridView1[e.ColumnIndex, e.RowIndex].Value.ToString() != "")
@@ -178,20 +191,23 @@ namespace WFAController
             {
                 String str = "timing: ";
 
-                if (DeviceList[e.RowIndex].TimingRuns != null)
-                {
-                    foreach (TimePeriod obj in DeviceList[e.RowIndex].TimingRuns)
+                    if (DeviceList[e.RowIndex].TimingRuns != null)
                     {
-                        str += " <from = day(" + obj.From.Day + ") " + obj.From.Hour + ":" + obj.From.Minute
-                            +  " To = day(" + obj.From.Day + ") " + obj.To.Hour + ":" + obj.From.Minute + ">";
+                        foreach (TimePeriod obj in DeviceList[e.RowIndex].TimingRuns)
+                        {
+                            str += " <from = day(" + obj.From.Day + ") " + obj.From.Hour + ":" + obj.From.Minute
+                                + " To = day(" + obj.From.Day + ") " + obj.To.Hour + ":" + obj.From.Minute + ">";
+                        }
                     }
-                }
+                
 
                 MessageBox.Show(str);
             }
             if (e.ColumnIndex == 7)
             {
-                DeviceList.RemoveAt(e.RowIndex);
+
+                    DeviceList.RemoveAt(e.RowIndex);
+                
             }
         }
 
@@ -295,6 +311,26 @@ namespace WFAController
         private void buttonLoadDevices_Click(object sender, EventArgs e)
         {
             URLConnector.ResicwDevises();
+            ////c = DeviceList.Count;
+
+            ////while (true)
+            ////{
+            //    if (c != DeviceList.Count)
+            //    {
+            //        c = DeviceList.Count;
+
+            //        DeviceList_ChangeDeviceList(DeviceList.DeviceList);
+            //    }
+            //    else
+            //    { 
+            //        for(int i = 0; i< c ; i++)
+            //        {
+            //            DeviceList_ChangeDevice(DeviceList.DeviceList[i], i);
+            //        }                
+            //    }
+            ////}
+            
+
         }
 
         private void buttonLoadTimng_Click(object sender, EventArgs e)
@@ -302,7 +338,7 @@ namespace WFAController
             for (int i = 0; i < DeviceList.Count; i++)
             {
                 URLConnector.LoadTiming(DeviceList[i]);
-            }
+            }            
         }
 
     }

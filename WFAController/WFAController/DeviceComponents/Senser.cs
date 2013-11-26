@@ -53,7 +53,7 @@ namespace WFAController.DeviceComponents
             {
                 alarm = true;
                 URLConnection.URLConnector.AlarmSensor(this);
-                MessageBox.Show("ALARM: " + Temperature + " > " + TemConst);
+                //MessageBox.Show("ALARM: " + Temperature + " > " + TemConst);
             }
             else
             {

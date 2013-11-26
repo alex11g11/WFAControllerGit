@@ -20,9 +20,8 @@ namespace WFAController.DeviceTimin
         private string ip = "192.168.1.4";
         private int port = 2200;
 
-
-        private List<DeviceBase> DeviceList;
-
+        List<DeviceBase> DeviceList;
+        
         public event ChangeDeviceList ChangeDeviceList;
         public event ChangeDevice ChangeDevice;
 
@@ -43,13 +42,13 @@ namespace WFAController.DeviceTimin
         public void AddDevise(DeviceBase obj)
         {
             this.DeviceList.Add(obj);
-            ChangeDeviceList(DeviceList);
+            ChangeDeviceList(DeviceList);            
         }
 
         public void RemoveAt(int ind)
         {
             this.DeviceList.RemoveAt(ind);
-            ChangeDeviceList(DeviceList);
+            ChangeDeviceList(DeviceList);            
         }
 
         public DeviceBase this[int i]
@@ -73,7 +72,7 @@ namespace WFAController.DeviceTimin
 
         public void EventNow(int i)
         {
-            ChangeDevice(this.DeviceList[i],i);
+            ChangeDevice(this.DeviceList[i], i);
         }
 
         private void StartListen()
@@ -85,100 +84,110 @@ namespace WFAController.DeviceTimin
 
             while (true)
             {
-                TcpClient client = listener.AcceptTcpClient();
-
-                Socket Sock = client.Client;
-                byte[] remdata = new byte[4000];
-                int i = Sock.Receive(remdata);
-
-                List<Type> typeList = new List<Type>();
-
-                typeList.Add(typeof(List<Device>));
-                typeList.Add(typeof(Device));
-                typeList.Add(typeof(Packet));
-                typeList.Add(typeof(Sensor));
-
-                int j = -1;
-                while (j < typeList.Count)
+                try
                 {
-                    if (Serializer.deserialize(remdata, typeList[++j]) != null)
-                    {
-                        break;
-                    }
-                }
+                    TcpClient client = listener.AcceptTcpClient();
 
-                if (j == 0)
-                {
-                    var res = (List<Device>)Serializer.deserialize(remdata, typeof(List<Device>));
+                    Socket Sock = client.Client;
+                    byte[] remdata = new byte[4000];
+                    int i = Sock.Receive(remdata);
 
-                    for (int g = 0; g < res.Count; g++)
+                    List<Type> typeList = new List<Type>();
+
+                    typeList.Add(typeof(List<Device>));
+                    typeList.Add(typeof(Device));
+                    typeList.Add(typeof(Packet));
+                    typeList.Add(typeof(Sensor));
+
+                    int j = 0;
+                    while (j < typeList.Count)
                     {
-                        if (res[g].Type == 4)
+                        if (Serializer.deserialize(remdata, typeList[j]) != null)
                         {
-                            this.AddDevise(DeviceConvert.DeviceToSenser(res[g]));
+                            break;
                         }
-                        else
-                        { 
-                            this.AddDevise(DeviceConvert.DeviceToDeviceB(res[g]));
-                        }                       
+
+                        j++;
                     }
-                }
-
-                if (j == 1)
-                {
-                    var res = (Device)Serializer.deserialize(remdata, typeof(Device));
-
-                    for (int g = 0; g < DeviceList.Count; g++)
+                    //j++;
+                    //MessageBox.Show("lol j = " + j);
+                    if (j == 0)
                     {
-                        if (DeviceList[g].SerialNumber == res.DeviceSerial)
+                        var res = (List<Device>)Serializer.deserialize(remdata, typeof(List<Device>));
+
+                        for (int g = 0; g < res.Count; g++)
                         {
-                            DeviceList[g].State = (res.State == 1) ? true : false;
-                            this.ChangeDevice(DeviceList[g],g);
-                        }
-                    }
-                }
-
-                if (j == 2)
-                {
-                    var res = (Packet)Serializer.deserialize(remdata, typeof(Packet));
-
-                    for (int g = 0; g < DeviceList.Count; g++)
-                    {
-                        if (DeviceList[g].SerialNumber == res.device.DeviceSerial)
-                        {
-                            String str = "timing: ";
-
-                            Timing timing = new Timing();
-
-                            foreach (Time obj in res.time)
+                            if (res[g].Type == 4)
                             {
-                                timing.Add(new TimePeriod((DateTime)obj.From, (DateTime)obj.To));
-                                str += " <from = " + ((DateTime)obj.From).Hour + " To = " + ((DateTime)obj.To).Hour + ">";
-                                
+                                this.AddDevise(DeviceConvert.DeviceToSenser(res[g]));
                             }
-                            //MessageBox.Show(str);
-                            DeviceList[g].TimingRuns = timing;
+                            else
+                            {
+                                this.AddDevise(DeviceConvert.DeviceToDeviceB(res[g]));
+                            }
                         }
                     }
 
-                }
-
-                if (j == 3)
-                {
-                    var res = (Sensor)Serializer.deserialize(remdata, typeof(Sensor));
-
-                    for (int p = 0; p < DeviceList.Count; p++)
+                    if (j == 1)
                     {
-                        if (res.DeviceSerial == DeviceList[p].SerialNumber)
+                        var res = (Device)Serializer.deserialize(remdata, typeof(Device));
+
+                        for (int g = 0; g < DeviceList.Count; g++)
                         {
-                            ((Senser)DeviceList[p]).TemConst = (int)res.tconst;
-                            EventNow(p);
+                            if (DeviceList[g].SerialNumber == res.DeviceSerial)
+                            {
+                                DeviceList[g].State = (res.State == 1) ? true : false;
+
+                                this.ChangeDevice(DeviceList[g], g);
+                            }
                         }
                     }
 
-                }
+                    if (j == 2)
+                    {
+                        var res = (Packet)Serializer.deserialize(remdata, typeof(Packet));
 
-                client.Close();
+                        for (int g = 0; g < DeviceList.Count; g++)
+                        {
+                            if (DeviceList[g].SerialNumber == res.device.DeviceSerial)
+                            {
+                                String str = "timing: ";
+
+                                Timing timing = new Timing();
+
+                                foreach (Time obj in res.time)
+                                {
+                                    timing.Add(new TimePeriod((DateTime)obj.From, (DateTime)obj.To));
+                                    str += " <from = " + ((DateTime)obj.From).Hour + " To = " + ((DateTime)obj.To).Hour + ">";
+
+                                }
+                                DeviceList[g].TimingRuns = timing;
+                            }
+                        }
+
+                    }
+
+                    if (j == 3)
+                    {
+                        var res = (Sensor)Serializer.deserialize(remdata, typeof(Sensor));
+
+                        for (int p = 0; p < DeviceList.Count; p++)
+                        {
+                            if (res.DeviceSerial == DeviceList[p].SerialNumber)
+                            {
+                                ((Senser)DeviceList[p]).TemConst = (int)res.tconst;
+                                EventNow(p);
+                            }
+                        }
+
+                    }
+
+                    client.Close();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("main cicle " + e.ToString());
+                }
             }
         }
     }
