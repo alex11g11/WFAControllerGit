@@ -19,7 +19,16 @@ namespace WFAController.URLConnection
             string controller = "AlarmSignalization";
             string param = "?DeviceSerial=" + obj.SerialNumber;
 
-            string result = Send(controller, param);
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("AlarmSignaling: " + e.ToString());
+            }
 
             return result;
         }
@@ -39,7 +48,17 @@ namespace WFAController.URLConnection
                 param += "0";
             }
 
-            string result = Send(controller, param);
+
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ChangeState: " + e.ToString());
+            }
 
             return result;
         }
@@ -49,7 +68,16 @@ namespace WFAController.URLConnection
             string controller = "AlarmSensor";
             string param = "?DeviceSerial=" + obj.SerialNumber;
 
-            string result = Send(controller, param);
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("AlarmSensor: " + e.ToString());
+            }
 
             return result;
         }
@@ -60,7 +88,16 @@ namespace WFAController.URLConnection
             string param = "?DeviceSerial=" + obj.SerialNumber 
                             + "&temperature=" + obj.Temperature;
 
-            string result = Send(controller, param);
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ChangeTemperature: " + e.ToString());
+            }
 
             return result;
         }
@@ -70,7 +107,16 @@ namespace WFAController.URLConnection
             string controller = "sendDevices";
             string param = "";
 
-            string result = Send(controller, param);
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("ResicwDevises: " + e.ToString());
+            }
 
             return result;
         }
@@ -80,7 +126,16 @@ namespace WFAController.URLConnection
             string controller = "sendTconst";
             string param = "?DeviceSerial=" + obj.SerialNumber;
 
-            string result = Send(controller, param);
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("GetTconst: " + e.ToString());
+            }
 
             return Convert.ToInt32(result);
         }
@@ -90,7 +145,16 @@ namespace WFAController.URLConnection
             string controller = "sendTemperature";
             string param = "?DeviceSerial=" + obj.SerialNumber;
 
-            string result = Send(controller, param);
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("GetTemp: " + e.ToString());
+            }
 
             return Convert.ToInt32(result);
         }
@@ -120,7 +184,16 @@ namespace WFAController.URLConnection
                 controller = "AddDevice";
             }
 
-            string result = Send(controller, param);
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("AddDevice: " + e.ToString());
+            }
 
             return result;
         }
@@ -131,7 +204,16 @@ namespace WFAController.URLConnection
 
             string param = "?DeviceSerial=" + obj.SerialNumber;
 
-            string result = Send(controller, param);
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("LoadTiming: " + e.ToString());
+            }
 
             return result;
         }
@@ -143,31 +225,31 @@ namespace WFAController.URLConnection
                             + "&Type=" + obj.Type
                             + "&State=" + obj.State
                             + "&tconst=" + obj.TemConst
-                            + "&t=" + obj.Temperature;                        
-
-            string result = Send(controller, param);
+                            + "&t=" + obj.Temperature; 
+     
+            string result = "";
+      
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("AddSensor: " + e.ToString());
+            }
 
             return result;
         }
 
         private static string Send(string controller, string param)
         {
-            try
-            {
-                var request = WebRequest.Create(baseUrl + controller + param);
-                request.Method = "GET";
+            var request = WebRequest.Create(baseUrl + controller + param);
+            request.Method = "GET";
 
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                return reader.ReadToEnd();
-            }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.ToString());
-            }
-
-            return "";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            return reader.ReadToEnd();
         }
     }
 }

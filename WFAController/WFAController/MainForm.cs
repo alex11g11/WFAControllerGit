@@ -69,19 +69,78 @@ namespace WFAController
 
         void DeviceList_ChangeDeviceList(List<DeviceBase> ListDevice)
         {
-            //this.dataGridView1.Rows.Clear();
-
-            for (int i = this.dataGridView1.Rows.Count; i < ListDevice.Count; i++) 
+            
+            if (this.dataGridView1.Rows.Count <= ListDevice.Count)
             {
-                this.dataGridView1.Rows.Add(ListDevice[i].GetTableRows());
-                //if (obj.Type == DeviceType.Sensor)
-                //    ((Button)this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[1]).Enabled = false;//).Enabled = false;
+                for (int i = this.dataGridView1.Rows.Count; i < ListDevice.Count; i++)
+                {
+                    this.dataGridView1.Rows.Add(ListDevice[i].GetTableRows());
+
+                    DataGridViewCellStyle dataGridViewCellStyle = new DataGridViewCellStyle();
+
+                    dataGridViewCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;                    
+                    dataGridViewCellStyle.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+                    
+                    if(ListDevice[i].State == true)
+                    {
+                        dataGridViewCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+                    }
+                    else
+                    {
+                        dataGridViewCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+                    }
+
+                    this.dataGridView1.Rows[i].Cells[1].Style = dataGridViewCellStyle;
+
+                    //if (obj.Type == DeviceType.Sensor)
+                    //    ((Button)this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Cells[1]).Enabled = false;//).Enabled = false;
+                }
+            }
+            else
+            {
+                this.dataGridView1.Rows.Clear();
+                for (int i = 0; i < ListDevice.Count; i++)
+                {
+                    this.dataGridView1.Rows.Add(ListDevice[i].GetTableRows());
+
+                    DataGridViewCellStyle dataGridViewCellStyle = new DataGridViewCellStyle();
+
+                    dataGridViewCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+                    dataGridViewCellStyle.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+
+                    if (ListDevice[i].State == true)
+                    {
+                        dataGridViewCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+                    }
+                    else
+                    {
+                        dataGridViewCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+                    }
+
+                    this.dataGridView1.Rows[i].Cells[1].Style = dataGridViewCellStyle;
+                }
             }
         }
 
         void DeviceList_ChangeDevice(DeviceBase Device, int ind)
         {
             this.dataGridView1.Rows[ind].SetValues(Device.GetTableRows());
+
+            DataGridViewCellStyle dataGridViewCellStyle = new DataGridViewCellStyle();
+
+            dataGridViewCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+
+            if (Device.State == true)
+            {
+                dataGridViewCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            }
+            else
+            {
+                dataGridViewCellStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            }
+
+            this.dataGridView1.Rows[ind].Cells[1].Style = dataGridViewCellStyle;
 
             URLConnector.ChangeState(Device);
         }
@@ -310,7 +369,7 @@ namespace WFAController
 
         private void buttonLoadDevices_Click(object sender, EventArgs e)
         {
-            URLConnector.ResicwDevises();
+            this.labelResult.Text = URLConnector.ResicwDevises();
             ////c = DeviceList.Count;
 
             ////while (true)

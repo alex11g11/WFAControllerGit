@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonStartCreate = new System.Windows.Forms.Button();
@@ -74,7 +81,6 @@
             this.ALARM = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ShowTiming = new System.Windows.Forms.DataGridViewButtonColumn();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinute)).BeginInit();
@@ -94,12 +100,11 @@
             this.Temperoture,
             this.ALARM,
             this.ShowTiming,
-            this.delete,
-            this.State});
+            this.delete});
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(745, 269);
+            this.dataGridView1.Size = new System.Drawing.Size(844, 269);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -115,7 +120,7 @@
             // 
             // buttonStartCreate
             // 
-            this.buttonStartCreate.Location = new System.Drawing.Point(763, 12);
+            this.buttonStartCreate.Location = new System.Drawing.Point(699, 307);
             this.buttonStartCreate.Name = "buttonStartCreate";
             this.buttonStartCreate.Size = new System.Drawing.Size(78, 40);
             this.buttonStartCreate.TabIndex = 2;
@@ -432,7 +437,7 @@
             // 
             // buttonLoadDevices
             // 
-            this.buttonLoadDevices.Location = new System.Drawing.Point(763, 58);
+            this.buttonLoadDevices.Location = new System.Drawing.Point(699, 353);
             this.buttonLoadDevices.Name = "buttonLoadDevices";
             this.buttonLoadDevices.Size = new System.Drawing.Size(78, 40);
             this.buttonLoadDevices.TabIndex = 39;
@@ -452,7 +457,7 @@
             // 
             // buttonLoadTimng
             // 
-            this.buttonLoadTimng.Location = new System.Drawing.Point(763, 104);
+            this.buttonLoadTimng.Location = new System.Drawing.Point(699, 399);
             this.buttonLoadTimng.Name = "buttonLoadTimng";
             this.buttonLoadTimng.Size = new System.Drawing.Size(78, 40);
             this.buttonLoadTimng.TabIndex = 41;
@@ -462,6 +467,9 @@
             // 
             // SerialNumber
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SerialNumber.DefaultCellStyle = dataGridViewCellStyle1;
             this.SerialNumber.HeaderText = "SerialNumber";
             this.SerialNumber.Name = "SerialNumber";
             this.SerialNumber.ReadOnly = true;
@@ -469,13 +477,22 @@
             // 
             // states
             // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.states.DefaultCellStyle = dataGridViewCellStyle2;
+            this.states.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.states.HeaderText = "states";
             this.states.Name = "states";
             this.states.ReadOnly = true;
             this.states.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.states.ToolTipText = "Click to change the status";
             // 
             // Type
             // 
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Type.DefaultCellStyle = dataGridViewCellStyle3;
             this.Type.HeaderText = "Type";
             this.Type.Name = "Type";
             this.Type.ReadOnly = true;
@@ -483,6 +500,9 @@
             // 
             // Tconst
             // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Tconst.DefaultCellStyle = dataGridViewCellStyle4;
             this.Tconst.HeaderText = "Tconst";
             this.Tconst.Name = "Tconst";
             this.Tconst.ReadOnly = true;
@@ -490,6 +510,9 @@
             // 
             // Temperoture
             // 
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Temperoture.DefaultCellStyle = dataGridViewCellStyle5;
             this.Temperoture.HeaderText = "Temperoture";
             this.Temperoture.Name = "Temperoture";
             this.Temperoture.ReadOnly = true;
@@ -497,6 +520,11 @@
             // 
             // ALARM
             // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ALARM.DefaultCellStyle = dataGridViewCellStyle6;
+            this.ALARM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ALARM.HeaderText = "ALARM";
             this.ALARM.Name = "ALARM";
             this.ALARM.ReadOnly = true;
@@ -504,33 +532,32 @@
             // 
             // ShowTiming
             // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ShowTiming.DefaultCellStyle = dataGridViewCellStyle7;
             this.ShowTiming.HeaderText = "Show Timing";
             this.ShowTiming.Name = "ShowTiming";
             this.ShowTiming.ReadOnly = true;
             // 
             // delete
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Quartz MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.delete.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delete.DefaultCellStyle = dataGridViewCellStyle8;
+            this.delete.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.delete.HeaderText = "delete";
             this.delete.Name = "delete";
             this.delete.ReadOnly = true;
             this.delete.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.delete.Text = "Delete";
             // 
-            // State
-            // 
-            this.State.HeaderText = "State";
-            this.State.Name = "State";
-            this.State.ReadOnly = true;
-            this.State.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(850, 481);
+            this.ClientSize = new System.Drawing.Size(868, 481);
             this.Controls.Add(this.buttonLoadTimng);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.buttonLoadDevices);
@@ -627,7 +654,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn ALARM;
         private System.Windows.Forms.DataGridViewButtonColumn ShowTiming;
         private System.Windows.Forms.DataGridViewButtonColumn delete;
-        private System.Windows.Forms.DataGridViewTextBoxColumn State;
 
     }
 }

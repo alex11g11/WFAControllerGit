@@ -43,7 +43,7 @@ namespace WFAController.DeviceComponents
 
         public virtual string[] GetTableRows()
         {
-            string[] str = { SerialNumber.ToString(), State.ToString(), Type.ToString(), "", "", "", "delete" };
+            string[] str = { SerialNumber.ToString(), (State == true) ? "on" : "off" , Type.ToString(), "", "", "", "show", "delete" };
 
             if (Type == DeviceType.Signaling)
             {
@@ -119,8 +119,17 @@ namespace WFAController.DeviceComponents
             res.Type = DeviceType.Sensor;
             res.SerialNumber = (int)obj.DeviceSerial;
             res.State = (obj.State == 1) ? true : false;
-            res.TemConst = URLConnector.GetTconst(res);
-            res.Temperature = URLConnector.GetTemp(res);
+            try
+            {
+                res.TemConst = URLConnector.GetTconst(res);
+                res.Temperature = URLConnector.GetTemp(res);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("DeviceToSenser: " + e.ToString());
+                res.TemConst = 0;
+                res.Temperature = 0;
+            }
             res.TimingRuns = new Timing();
 
             return res;

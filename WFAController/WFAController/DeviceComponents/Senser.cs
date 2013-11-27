@@ -35,7 +35,7 @@ namespace WFAController.DeviceComponents
         {
             string[] str =  base.GetTableRows();
 
-            string[] at = { base.GetTableRows()[0], base.GetTableRows()[1], base.GetTableRows()[2], TemConst.ToString(), Temperature.ToString(), "ALARM" , "delete" };
+            string[] at = { base.GetTableRows()[0], base.GetTableRows()[1], base.GetTableRows()[2], TemConst.ToString(), Temperature.ToString(), "ALARM", "show","delete" };
         
             return at;
         }

@@ -84,8 +84,7 @@ namespace WFAController.DeviceTimin
 
             while (true)
             {
-                try
-                {
+
                     TcpClient client = listener.AcceptTcpClient();
 
                     Socket Sock = client.Client;
@@ -113,18 +112,25 @@ namespace WFAController.DeviceTimin
                     //MessageBox.Show("lol j = " + j);
                     if (j == 0)
                     {
-                        var res = (List<Device>)Serializer.deserialize(remdata, typeof(List<Device>));
-
-                        for (int g = 0; g < res.Count; g++)
+                        try
                         {
-                            if (res[g].Type == 4)
+                            var res = (List<Device>)Serializer.deserialize(remdata, typeof(List<Device>));
+
+                            for (int g = 0; g < res.Count; g++)
                             {
-                                this.AddDevise(DeviceConvert.DeviceToSenser(res[g]));
+                                if (res[g].Type == 4)
+                                {
+                                    this.AddDevise(DeviceConvert.DeviceToSenser(res[g]));
+                                }
+                                else
+                                {
+                                    this.AddDevise(DeviceConvert.DeviceToDeviceB(res[g]));
+                                }
                             }
-                            else
-                            {
-                                this.AddDevise(DeviceConvert.DeviceToDeviceB(res[g]));
-                            }
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("main TCP listener " + e.ToString());
                         }
                     }
 
@@ -183,11 +189,6 @@ namespace WFAController.DeviceTimin
                     }
 
                     client.Close();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("main cicle " + e.ToString());
-                }
             }
         }
     }
