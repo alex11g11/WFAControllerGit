@@ -198,6 +198,26 @@ namespace WFAController.URLConnection
             return result;
         }
 
+        public static string RemoveDevice(DeviceBase obj)
+        {
+            string controller = "DelDevice";
+
+            string param = "?DeviceSerial=" + obj.SerialNumber;
+
+            string result = "";
+
+            try
+            {
+                result = Send(controller, param);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("AddDevice: " + e.ToString());
+            }
+
+            return result;
+        }
+
         public static string LoadTiming(DeviceBase obj)
         {
             string controller = "setTiming";

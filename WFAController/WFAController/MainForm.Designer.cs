@@ -536,6 +536,7 @@
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ShowTiming.DefaultCellStyle = dataGridViewCellStyle7;
+            this.ShowTiming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShowTiming.HeaderText = "Show Timing";
             this.ShowTiming.Name = "ShowTiming";
             this.ShowTiming.ReadOnly = true;
@@ -546,7 +547,7 @@
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delete.DefaultCellStyle = dataGridViewCellStyle8;
-            this.delete.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.delete.HeaderText = "delete";
             this.delete.Name = "delete";
             this.delete.ReadOnly = true;

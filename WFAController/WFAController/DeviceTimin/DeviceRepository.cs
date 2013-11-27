@@ -48,7 +48,9 @@ namespace WFAController.DeviceTimin
         public void RemoveAt(int ind)
         {
             this.DeviceList.RemoveAt(ind);
-            ChangeDeviceList(DeviceList);            
+            ChangeDeviceList(DeviceList);
+            var str = URLConnection.URLConnector.RemoveDevice(DeviceList[ind]);
+            MessageBox.Show(str);
         }
 
         public DeviceBase this[int i]
